@@ -1,0 +1,22 @@
+const int red_led = 13;
+const int blue_led = 12;
+unsigned long time_previous_red=0;//Red Led 이전 시간 측정
+int state_red=0;//Red Led의 on/off 상태를 기억
+
+void setup()
+{
+ pinMode(red_led,OUTPUT);//0.5초 간격 점멸
+  pinMode(blue_led,OUTPUT);//1초 간격 점멸
+}
+
+void loop()
+{
+  unsigned long time_current = millis();//현재시간을 측정
+  if(time_current - time_previous_red >= 500)
+  { 
+    //현재시간 - 이전시간이 0.5초보다 크다면....
+    time_previous_red = time_current;//이전 실행시간을 측정
+    state_red = !state_red;//Red Led의 상태를 change!
+    digitalWrite(red_led,state_red);//on,off를 설정!
+  }
+}
